@@ -917,7 +917,7 @@ else
     if (!isMatch) {
       console.log("her4");
 
-      return res.status(201).json({ success: false, message: "Invalid Password" });
+      return res.status(201).json({ success: false, message: "Invalid Password." });
     }
     
     console.log("here5");

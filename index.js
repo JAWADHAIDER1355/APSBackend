@@ -6,6 +6,7 @@ app.use(bodyParser.json());
 const multer = require("multer");
 const upload = multer();
 app.use(upload.any());
+
 const cors = require("cors");
 app.use(cors());
 app.use(cors({credentials:true,origin:"http://localhost:3000"}));
