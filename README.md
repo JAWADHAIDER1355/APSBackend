@@ -1,5 +1,5 @@
 # APS-Backend-for-Web-MobileApp-IoT
-APS includes Complete system consisting of Mobile App , Web App and IoT to provide efficient management to companies and efficient parking experience to users. This Repository contains only Backend Material and deployed on Railway app.  
+APS includes Complete system consisting of Mobile App , Web App and IoT to provide efficient management to companies and efficient parking experience to users. This Repository contains only Backend Material of IoT, MobileApp and WebApp and deployed through Railway app.  
 
   Deployed Version SERVERURL is https://apsbackend-production.up.railway.app/
   
