@@ -5,6 +5,7 @@ const router=express.Router();//is k according require
 const {setCost,setMapRange,getFilledSlots,getAvailableSlots,getBookedSlots,findVehicle,getAdminObjectByEmail,getAdmins,getModifiedRequests,register,modify,verifyEmail,login,accept,acceptModification,reject,rejectModification,sendMessage,getAdminByEmail, getSlots}= require('../controller/auth');
 
 router.post('/register',register);
+
 router.post('/modify',modify);
 router.post('/setCost',setCost);
 router.post('/setMapRange',setMapRange);

@@ -129,7 +129,6 @@ const rejectModification= async(req,res)=>{
   }  
 }
 
-
 const accept= async(req,res)=>{
   const { name1, email1 } = req.body;
   const nameIs=req.body.name1;
@@ -192,8 +191,6 @@ companyAdmin.verified="true";
 
 }
  
-
-
 const acceptModification= async(req,res)=>{
   const { name1, email1 } = req.body;
   const nameIs=req.body.name1;
@@ -261,10 +258,6 @@ const acceptModification= async(req,res)=>{
 
 }
 
-
-
-
-
 const sendMessage= async(req,res)=>{
   const { userEmail, message } = req.body;
   const emailIs=req.body.userEmail;
@@ -309,8 +302,6 @@ try{
   }  
 
 }
-
-
 
 const findVehicle = async (req, res) => {
   try {
@@ -372,8 +363,6 @@ let companyAdmin=companyAdminn[0];
   }
 };
 
-
-
 const getSlots = async (req, res) => {
   try {
     console.log("aya isme");
@@ -427,8 +416,6 @@ const getSlots = async (req, res) => {
     res.status(500).json({ success: false, error: "Internal Server Error" });
   }
 };
-
-
 
 const getAvailableSlots = async (req, res) => {
   try {
@@ -651,7 +638,6 @@ const setCost = async (req, res) => {
   }
 }
 
-
 const setMapRange = async (req, res) => {
   try {
     const { email, MapRange } = req.body;
@@ -727,6 +713,7 @@ const modify= async(req,res)=>{
     }
 }
 
+
 const register= async(req,res)=>{
     try {
       // Handle user registration here
@@ -778,10 +765,6 @@ const register= async(req,res)=>{
         res.status(500).json({ success: false, message: "Registration failed" });
       }
   }
-
-
-  
-  
   const verifyEmail=async(req,res)=>{
     try {
       console.log(req.body);
@@ -831,10 +814,6 @@ else
       res.status(500).json({ success: false, message: "Email verification failed" });
     }
   }
-
-
-
-
 
 const login = async (req, res) => {
   try {
@@ -941,10 +920,6 @@ else
   }
 }
 
-
-
-
-
 const getAdminByEmail = async (req, res) => {
   try {
     console.log("aya hai isme aab");
@@ -982,8 +957,6 @@ console.log(responseData);
   }
 };
 
-
-
 const getAdmins = async (req, res) => {
   try {
     console.log("aya isme");
@@ -1007,7 +980,6 @@ console.log(companyAdmins);
     res.status(500).json({ error: "Internal Server Error" });
   }
 };
-
 
 const getModifiedRequests = async (req, res) => {
   try {

@@ -21,10 +21,15 @@ const authenticateUser = require('./middleware/authentication');
 
 //router
 const authRouter= require('./routes/auth');
+const mobileAppRouter= require('./routes/mobileAppRoutes');
+const reservationRouter= require('./routes/reservationRoutes');
 //const projectRouter= require('./routes/Project');
 // const partnerRouter= require('./routes/Partner');
 app.use(express.json())
 app.use('/api/v1/', authRouter);
+app.use('/api/v1/',mobileAppRouter);
+app.use('/api/v1/',reservationRouter);
+
 
 //middleware
 //app.use('/api/v2/',authenticateUser,getAdmin);
