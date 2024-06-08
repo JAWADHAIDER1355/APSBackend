@@ -1,4 +1,5 @@
 const Customer= require('../models/Customer')
+const User= require('../models/Admin')
 const nodemailer= require('nodemailer')
 const bcrypt = require('bcryptjs');
 
@@ -22,6 +23,72 @@ const registerMobileApp= async(req,res)=>{
   {
     res.status(500).json({ success: false, message: "User Already Exists." });
   }
+    } catch (error) {
+      console.error(error);
+      res.status(500).json({ success: false, message: "An Error Occured" });
+    }
+}
+
+const updateStatus= async(req,res)=>{
+  try {
+    // Handle user registration here
+   const { companyEmail,floorNo,rowNo,columnNo,vehicleNumber}= req.body;
+   console.log("came in register.",companyEmail);
+
+   console.log(req.body);
+  
+   const companyAdmin = await User.findOne({ email: companyEmail });
+   console.log("companyAdmin is,", companyAdmin);
+
+   if (!companyAdmin) {
+     return res.status(404).json({ success: false, message: "Company not found!" });
+   }
+
+   let floorsPlan = companyAdmin.floorsPlan;
+   console.log("No of Floors:", floorsPlan.length);
+
+   let updated = false;
+
+   const updatedFloorsPlan = floorsPlan.map((floor, floorIndex) => {
+     if (floorIndex === floorNo) { // Adjusting the floor index
+       return floor.map((row, rowIndex) => {
+         if (rowIndex === rowNo) { // Adjusting the row index
+           return row.map((cell, cellIndex) => {
+             if (cellIndex === columnNo) {
+               console.log("came here-------------");
+               console.log(cell);
+
+               // Create a new object instead of modifying the existing one
+               const updatedCell = {
+                 ...cell,
+                 status: "booked",
+                 vehicle: vehicleNumber
+               };
+
+               console.log(updatedCell);
+               updated = true;
+               return updatedCell;
+             }
+             return cell;
+           });
+         }
+         return row;
+       });
+     }
+     return floor;
+   });
+
+   // Update the floorsPlan attribute of companyAdmin with the updated floorsPlan object
+   if (updated) {
+     console.log("here also came");
+     companyAdmin.floorsPlan = updatedFloorsPlan;
+     await companyAdmin.save();
+     console.log("here not came");
+     return res.status(200).json({ success: true, message: "Status Updated Successfully." });
+   } else {
+     res.status(200).json({ success: false, message: "No Slot Found!" });
+   }
+
     } catch (error) {
       console.error(error);
       res.status(500).json({ success: false, message: "An Error Occured" });
@@ -94,4 +161,4 @@ const storeFile = async (file, id) => {
 };
 
 
-  module.exports={registerMobileApp,loginMobileApp};
+  module.exports={registerMobileApp,loginMobileApp,updateStatus};

@@ -27,16 +27,16 @@ const getParticularReservation = async (req, res) => {
     console.log("aya hai isme aab");
     const { userId } = req.query;
     console.log("userId is :", userId);
-    const reservation1 = await Reservation.findOne({ userId });
+    const reservation1 = await Reservation.find({ userId });
     const responseData = {
-      reservationIs:reservation1
+      userReservations:reservation1
     };
     
 console.log(responseData);
 
     res.status(200).json(responseData);
   } catch (error) {
-    console.error("Error fetching Reservation data:", error);
+    console.error("Error fetching Particular Reservations data:", error);
     res.status(500).json({ error: "Internal Server Error" });
   }
 };
