@@ -7,38 +7,11 @@ const bcrypt = require('bcryptjs');
 const addReservation= async(req,res)=>{
     try {
       // Handle user registration here
-     const { userId, companyEmail,floorNo,rowNo, columnNo,entryTime,exitTime,vehicleNumber,date }= req.body;
+     const { userId, companyEmail,floorNo,slotNo,entryTime,exitTime,vehicleNumber,date }= req.body;
      console.log("came in add.",userId);
      console.log(req.body);
-
-
-     const companyAdmin = await User.findOne({ email: companyEmail });
-     if (!companyAdmin) {
-       return res.status(404).json({ success: false, message: "Company not found!" });
-     }
  
-     const floorsPlan = companyAdmin.floorsPlan;
-     let slotNum = 0;
- 
-     const foundFloor = floorsPlan[floorNo];
-     if (!foundFloor) {
-       return res.status(404).json({ success: false, message: "Floor not found!" });
-     }
- 
-     const foundRow = foundFloor[rowNo];
-     if (!foundRow) {
-       return res.status(404).json({ success: false, message: "Row not found!" });
-     }
- 
-     const cell = foundRow[columnNo];
-     if (!cell) {
-       return res.status(404).json({ success: false, message: "Cell not found!" });
-     }
- 
-     console.log("cell is: ",cell)
-     slotNum = cell.slotNo;
- 
-     const reservation1 = new Reservation({ userId,companyEmail, floorNo, rowNo, columnNo, slotNo: slotNum, entryTime, exitTime, vehicleNumber, date });
+     const reservation1 = new Reservation({ userId,companyEmail, floorNo, slotNo, entryTime, exitTime, vehicleNumber, date });
      await reservation1.save();
  
      return res.status(200).json({ success: true, message: "Booked Successfully." });     

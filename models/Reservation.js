@@ -12,12 +12,6 @@ const ReservationSchema = new mongoose.Schema({
     floorNo: {
       type: Number,
     },
-    rowNo: {
-      type: Number,
-    },
-    columnNo: {
-      type: Number,
-    },
     slotNo: {
       type: String,
     },

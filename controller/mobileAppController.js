@@ -32,7 +32,7 @@ const registerMobileApp= async(req,res)=>{
 const updateStatus= async(req,res)=>{
   try {
     // Handle user registration here
-   const { companyEmail,floorNo,rowNo,columnNo,vehicleNumber}= req.body;
+   const { companyEmail,floorNo,slotNo,vehicleNumber}= req.body;
    console.log("came in register.",companyEmail);
 
    console.log(req.body);
@@ -53,9 +53,8 @@ const updateStatus= async(req,res)=>{
    const updatedFloorsPlan = floorsPlan.map((floor, floorIndex) => {
      if (floorIndex === floorNo) { // Adjusting the floor index
        return floor.map((row, rowIndex) => {
-         if (rowIndex === rowNo) { // Adjusting the row index
            return row.map((cell, cellIndex) => {
-             if (cellIndex === columnNo) {
+             if (cell.slotNo === slotNo) {
                console.log("came here-------------");
                console.log(cell);
 
@@ -73,7 +72,7 @@ profit=parseInt(cell.cost, 10);
              }
              return cell;
            });
-         }
+         
          return row;
        });
      }
