@@ -45,10 +45,11 @@ const updateStatus= async(req,res)=>{
    }
 
    let floorsPlan = companyAdmin.floorsPlan;
+   let profit=0;
    console.log("No of Floors:", floorsPlan.length);
 
    let updated = false;
-let profit=0;
+
    const updatedFloorsPlan = floorsPlan.map((floor, floorIndex) => {
      if (floorIndex === floorNo) { // Adjusting the floor index
        return floor.map((row, rowIndex) => {
@@ -57,7 +58,8 @@ let profit=0;
              if (cellIndex === columnNo) {
                console.log("came here-------------");
                console.log(cell);
-profit=cell.cost;
+
+profit=parseInt(cell.cost, 10);
                // Create a new object instead of modifying the existing one
                const updatedCell = {
                  ...cell,
