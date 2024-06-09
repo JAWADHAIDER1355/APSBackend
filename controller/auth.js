@@ -741,11 +741,11 @@ const register= async(req,res)=>{
  
       const image = req.files[0];
            
-
+const netProfit=0;
       const existingUser = await User.findOne({ email });
     if(!existingUser)
     {
-      const user = new User({ userName, role, email, password, contactNumber,noOfFloors, noOfSlots, floorsPlan:floorsPlann, status,longitude,latitude  });
+      const user = new User({ userName, role, email, password, contactNumber,noOfFloors, noOfSlots,netProfit, floorsPlan:floorsPlann, status,longitude,latitude  });
       if (image) {
         const filePath = await storeFile(image, user._id);
         console.log("filePath user: ", filePath);

@@ -30,6 +30,9 @@ const AdminSchema = new mongoose.Schema({
     ,noOfSlots:{
       type:Number,
     }
+    ,netProfit:{
+      type:Number,
+    }
     ,modifiedNoOfSlots:{
       type:Number,
     }

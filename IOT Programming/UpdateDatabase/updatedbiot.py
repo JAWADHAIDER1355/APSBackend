@@ -90,6 +90,9 @@ try:
             print(f"Slot with plate number '{most_confident_plate_number}' updated to 'Available'.")
         else:
             # Iterate through the floorsPlan array to find the first cell that matches the criteria
+            
+            # Wring right now : task to do yet : update to filled when already booked by same vehicle number, booked from mobile app, change to available when same vehicle again come to this sensor or camera and remove vehilce number form cell object 
+            
             for floor in floorsPlan:
                 for row in floor:
                     for cell in row:

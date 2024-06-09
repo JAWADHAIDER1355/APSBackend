@@ -48,7 +48,7 @@ const updateStatus= async(req,res)=>{
    console.log("No of Floors:", floorsPlan.length);
 
    let updated = false;
-
+let profit=0;
    const updatedFloorsPlan = floorsPlan.map((floor, floorIndex) => {
      if (floorIndex === floorNo) { // Adjusting the floor index
        return floor.map((row, rowIndex) => {
@@ -57,7 +57,7 @@ const updateStatus= async(req,res)=>{
              if (cellIndex === columnNo) {
                console.log("came here-------------");
                console.log(cell);
-
+profit=cell.cost;
                // Create a new object instead of modifying the existing one
                const updatedCell = {
                  ...cell,
@@ -80,7 +80,18 @@ const updateStatus= async(req,res)=>{
 
    // Update the floorsPlan attribute of companyAdmin with the updated floorsPlan object
    if (updated) {
+
      console.log("here also came");
+     if(companyAdmin.netProfit===undefined||companyAdmin.netProfit===null)
+      {
+        companyAdmin.netProfit = profit;
+
+      }
+      else
+      {
+        companyAdmin.netProfit = companyAdmin.netProfit+profit;
+
+      }
      companyAdmin.floorsPlan = updatedFloorsPlan;
      await companyAdmin.save();
      console.log("here not came");
