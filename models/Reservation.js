@@ -30,6 +30,9 @@ const ReservationSchema = new mongoose.Schema({
     date: {
       type: Date,
     },
+    day: {
+      type: String,
+    },
 
   });
 

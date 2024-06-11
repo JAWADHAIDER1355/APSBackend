@@ -154,23 +154,4 @@ const loginMobileApp = async (req, res) => {
 }
 
 
-
-const storeFile = async (file, id) => {
-  console.log("file: ", file);
-  const fs = require("fs");
-  const path = require("path");
-  const fileType = file.mimetype.split("/")[1];
-  const filePath = path.join(__dirname, `../uploads`, `${id}.${fileType}`);
-  console.log("filePath: ", filePath);
-  fs.writeFileSync(filePath, file.buffer, function (err) {
-    if (err) {
-      console.log("error is", err);
-    } else {
-      console.log("file saved");
-    }
-  });
-  return `${id}.${fileType}`;
-};
-
-
   module.exports={registerMobileApp,loginMobileApp,updateStatus};

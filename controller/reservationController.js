@@ -5,7 +5,7 @@ const Company= require('../models/Admin')
 const addReservation= async(req,res)=>{
     try {
       // Handle user registration here
-     const { userId, companyEmail,floorNo,slotNo,entryTime,exitTime,vehicleNumber,date }= req.body;
+     const { userId, companyEmail,floorNo,slotNo,entryTime,exitTime,vehicleNumber,date,day }= req.body;
      console.log("came in add.",userId);
      const companyAdmin = await Company.findOne({ email: companyEmail });
      console.log("companyAdmin is,", companyAdmin.userName);
@@ -13,7 +13,7 @@ const addReservation= async(req,res)=>{
      
      console.log(req.body);
  
-     const reservation1 = new Reservation({ userId,companyEmail, companyName:companyAdmin.userName,floorNo, slotNo, entryTime, exitTime, vehicleNumber, date });
+     const reservation1 = new Reservation({ userId,companyEmail, companyName:companyAdmin.userName,floorNo, slotNo, entryTime, exitTime, vehicleNumber, date ,day});
      await reservation1.save();
  
      return res.status(200).json({ success: true, message: "Booked Successfully." });     
@@ -56,24 +56,5 @@ console.log(reservations);
     res.status(500).json({ error: "Internal Server Error" });
   }
 };
-
-
-const storeFile = async (file, id) => {
-  console.log("file: ", file);
-  const fs = require("fs");
-  const path = require("path");
-  const fileType = file.mimetype.split("/")[1];
-  const filePath = path.join(__dirname, `../uploads`, `${id}.${fileType}`);
-  console.log("filePath: ", filePath);
-  fs.writeFileSync(filePath, file.buffer, function (err) {
-    if (err) {
-      console.log("error is", err);
-    } else {
-      console.log("file saved");
-    }
-  });
-  return `${id}.${fileType}`;
-};
-//Project
 
   module.exports={addReservation,getReservations,getParticularReservation};
