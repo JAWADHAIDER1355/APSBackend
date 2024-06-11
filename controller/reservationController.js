@@ -1,7 +1,5 @@
 const Reservation= require('../models/Reservation')
-const User= require('../models/Admin')
-const nodemailer= require('nodemailer')
-const bcrypt = require('bcryptjs');
+const Company= require('../models/Admin')
 
 
 const addReservation= async(req,res)=>{
@@ -9,9 +7,13 @@ const addReservation= async(req,res)=>{
       // Handle user registration here
      const { userId, companyEmail,floorNo,slotNo,entryTime,exitTime,vehicleNumber,date }= req.body;
      console.log("came in add.",userId);
+     const companyAdmin = await Company.findOne({ email: companyEmail });
+     console.log("companyAdmin is,", companyAdmin.userName);
+  
+     
      console.log(req.body);
  
-     const reservation1 = new Reservation({ userId,companyEmail, floorNo, slotNo, entryTime, exitTime, vehicleNumber, date });
+     const reservation1 = new Reservation({ userId,companyEmail, companyName:companyAdmin.userName,floorNo, slotNo, entryTime, exitTime, vehicleNumber, date });
      await reservation1.save();
  
      return res.status(200).json({ success: true, message: "Booked Successfully." });     

@@ -6,8 +6,11 @@ const ReservationSchema = new mongoose.Schema({
     userId:{
       type:String,//email of user who is booking a slot or having a reservation of slot
     },
+    companyName:{
+      type:String,//name of company 
+    },
     companyEmail:{
-      type:String,//email of user who is booking a slot or having a reservation of slot
+      type:String,//email of company
     },
     floorNo: {
       type: Number,
