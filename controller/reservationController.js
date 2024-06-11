@@ -5,7 +5,7 @@ const Company= require('../models/Admin')
 const addReservation= async(req,res)=>{
     try {
       // Handle user registration here
-     const { userId, companyEmail,floorNo,slotNo,entryTime,exitTime,vehicleNumber,date,day }= req.body;
+     const { userId, companyEmail,floorNo,slotNo,entryTime,exitTime,vehicleNumber,date }= req.body;
      console.log("came in add.",userId);
      const companyAdmin = await Company.findOne({ email: companyEmail });
      console.log("companyAdmin is,", companyAdmin.userName);
@@ -13,7 +13,7 @@ const addReservation= async(req,res)=>{
      
      console.log(req.body);
  
-     const reservation1 = new Reservation({ userId,companyEmail, companyName:companyAdmin.userName,floorNo, slotNo, entryTime, exitTime, vehicleNumber, date ,day});
+     const reservation1 = new Reservation({ userId,companyEmail, companyName:companyAdmin.userName,floorNo, slotNo, entryTime, exitTime, vehicleNumber, date});
      await reservation1.save();
  
      return res.status(200).json({ success: true, message: "Booked Successfully." });     
