@@ -30,6 +30,11 @@ const addReservation= async(req,res)=>{
       const { companyEmail } = req.query;
       console.log("company Email is :", companyEmail);
       const reservation1 = await Reservation.find({ companyEmail });
+      if(!reservation1)
+        {
+          res.status(201).json({ error: "No Reservation found" });
+        }
+
       const responseData = {
         userReservations:reservation1
       };
