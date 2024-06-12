@@ -24,7 +24,28 @@ const addReservation= async(req,res)=>{
       }
   }
 
-const getParticularReservation = async (req, res) => {
+  const getCompanyReservations = async (req, res) => {
+    try {
+      console.log("aya hai isme aab");
+      const { companyEmail } = req.query;
+      console.log("company Email is :", companyEmail);
+      const reservation1 = await Reservation.find({ companyEmail });
+      const responseData = {
+        userReservations:reservation1
+      };
+      
+  console.log(responseData);
+  
+      res.status(200).json(responseData);
+    } catch (error) {
+      console.error("Error fetching Particular Reservations data:", error);
+      res.status(500).json({ error: "Internal Server Error" });
+    }
+  };
+  
+
+
+  const getParticularReservation = async (req, res) => {
   try {
     console.log("aya hai isme aab");
     const { userId } = req.query;
@@ -57,4 +78,4 @@ console.log(reservations);
   }
 };
 
-  module.exports={addReservation,getReservations,getParticularReservation};
+  module.exports={addReservation,getReservations,getParticularReservation,getCompanyReservations};
