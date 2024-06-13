@@ -12,7 +12,7 @@ MONGO_URI = "mongodb://jawadhaider682:Ep8km9btNMhWJa0x@ac-puxt79s-shard-00-00.ow
 
 # Client ID from your Imgur application
 client_id = 'b841234729f0d21'
-
+my_variable =0
 
 # MongoDB Atlas connection URI
 MONGO_URI = "mongodb://jawadhaider682:Ep8km9btNMhWJa0x@ac-puxt79s-shard-00-00.owke4n8.mongodb.net:27017,ac-puxt79s-shard-00-01.owke4n8.mongodb.net:27017,ac-puxt79s-shard-00-02.owke4n8.mongodb.net:27017/?ssl=true&replicaSet=atlas-jx0038-shard-0&authSource=admin&retryWrites=true&w=majority&appName=Cluster0"
@@ -39,8 +39,10 @@ def on_connect(client, userdata, flags, rc):
 
 # Callback function for when a message is received
 def on_message(client, userdata, message):
+    global my_variable
     print("Message received on topic:", message.topic)
     # Decode the received image data
+    my_variable=my_variable+1
     image_data = base64.b64decode(message.payload)
     # Save the image data to a file
     with open("received_image.jpg", "wb") as image_file:
@@ -48,7 +50,8 @@ def on_message(client, userdata, message):
     print("Image saved to file: received_image.jpg")
 
 # Define the command to run your Python file
-    command = ["python", "updatedbiot.py"]
+    
+    command = ["python", "updatedbiot.py", str(my_variable)]
 
 # Run the command
     subprocess.run(command)
